@@ -23,12 +23,16 @@
 </template>
 
 <script>
-// import GameMonster from "./components/GameMonster.vue";
+import GameMonster from "./components/GameMonster.vue";
+import UsersManagement from "./components/UsersManagement.vue";
+import TaskManagement from "./components/TaskManagement.vue";
 
 export default {
   name: "App",
   components: {
-    // GameMonster,
+    GameMonster,
+    UsersManagement,
+    TaskManagement,
   },
   data() {
     return {
@@ -52,8 +56,8 @@ export default {
     },
 
     deleteUser() {
-      console.log("parent delete")
-    }
+      console.log("parent delete");
+    },
   },
 
   // provide: {
@@ -62,9 +66,9 @@ export default {
 
   provide() {
     return {
-      operations: ['Update', 'Delete', 'Edit', 'Add'],
+      operations: ["Update", "Delete", "Edit", "Add"],
       deleteUser: this.deleteUser,
-    }
+    };
   },
 
   computed: {},
