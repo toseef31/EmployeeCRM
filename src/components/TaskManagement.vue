@@ -18,13 +18,25 @@
     <input type="text" placeholder="Enter your experience" ref="experience" />
     <button type="button" @click="setExp()">Check Exp</button>
   </div>
+
+  <teleport to="body">
+    <AlertDialog v-if="inputIsInvalid">
+      <h3>No empty string allowed</h3>
+    </AlertDialog>
+  </teleport>
 </template>
 
 <script>
+import AlertDialog from "./AlertDialog.vue";
+
 export default {
   name: "TaskManagement",
+  components: {
+    AlertDialog,
+  },
   data() {
     return {
+      inputIsInvalid: false,
       tasks: [],
       task: "",
     };
@@ -34,6 +46,13 @@ export default {
 
   methods: {
     addTask() {
+      if (this.task === "") {
+        this.inputIsInvalid = true;
+        setTimeout(() => {
+          this.inputIsInvalid = false;
+        }, 3000);
+        return;
+      }
       this.tasks.push(this.task);
       this.task = "";
     },

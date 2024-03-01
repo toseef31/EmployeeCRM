@@ -5,7 +5,7 @@
   <p style="border: 1px solid black"></p>
   <br />
 
-  <UsersManagement
+  <!-- <UsersManagement
     v-for="user in users"
     :key="user.id"
     :id="user.id"
@@ -13,19 +13,38 @@
     :degree="user.degree"
     @user-updated="userUpdated"
   >
-  </UsersManagement>
+  </UsersManagement> -->
+
+  <!-- <br />
+  <p style="border: 1px solid black"></p>
+  <br /> -->
+
+  <!-- <TaskManagement> </TaskManagement> -->
+  <button type="button" @click="loadComponent('users-management')">User Management</button> &nbsp;
+  <button type="button" @click="loadComponent('task-management')">Task Management</button>
+  <br><br>
+  <keep-alive>
+    <component :is="selectedComponent"></component>
+  </keep-alive>
 
   <br />
   <p style="border: 1px solid black"></p>
   <br />
 
-  <TaskManagement> </TaskManagement>
+  <CompanyProfile>
+    <template #default="slotProfile">
+      <p>Name: {{ slotProfile.item.name }}</p>
+      <p>Partner Status: {{ slotProfile.item.partner }}</p>
+      <p>Partnership Start Date: {{ slotProfile.item.partner_time }}</p>
+    </template>
+  </CompanyProfile>
 </template>
 
 <script>
 import GameMonster from "./components/GameMonster.vue";
 import UsersManagement from "./components/UsersManagement.vue";
 import TaskManagement from "./components/TaskManagement.vue";
+import CompanyProfile from "./components/CompanyProfile.vue";
 
 export default {
   name: "App",
@@ -33,9 +52,11 @@ export default {
     GameMonster,
     UsersManagement,
     TaskManagement,
+    CompanyProfile,
   },
   data() {
     return {
+      selectedComponent: "task-management",
       users: [
         {
           id: 0,
@@ -58,6 +79,10 @@ export default {
     deleteUser() {
       console.log("parent delete");
     },
+
+    loadComponent(componentName) {
+      this.selectedComponent = componentName;
+    }
   },
 
   // provide: {
