@@ -1,10 +1,5 @@
 <template>
-  <GameMonster msg="Welcome to Vue Monster game" :gameReady="true" />
-
-  <br />
-  <p style="border: 1px solid black"></p>
-  <br />
-
+  <AppHeader></AppHeader>
   <!-- <UsersManagement
     v-for="user in users"
     :key="user.id"
@@ -15,16 +10,11 @@
   >
   </UsersManagement> -->
 
-  <!-- <br />
-  <p style="border: 1px solid black"></p>
-  <br /> -->
-
-  <!-- <TaskManagement> </TaskManagement> -->
   <button type="button" @click="loadComponent('users-management')">User Management</button> &nbsp;
-  <button type="button" @click="loadComponent('task-management')">Task Management</button>
+  <button type="button" @click="loadComponent('game-monster')">Time Pass Game</button>
   <br><br>
   <keep-alive>
-    <component :is="selectedComponent"></component>
+    <component :is="selectedComponent" :parentData="users" @handle-update="handleUpdate"></component>
   </keep-alive>
 
   <br />
@@ -33,61 +23,75 @@
 
   <CompanyProfile>
     <template #default="slotProfile">
-      <p>Name: {{ slotProfile.item.name }}</p>
-      <p>Partner Status: {{ slotProfile.item.partner }}</p>
-      <p>Partnership Start Date: {{ slotProfile.item.partner_time }}</p>
+              <div class="card-img">
+                <img src="/img/events-2.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><a href="">{{ slotProfile.item.name }}</a></h5>
+                <p class="fst-italic text-center">{{ slotProfile.item.partner_time }}</p>
+                <p class="card-text">{{ slotProfile.item.partner }}</p>
+              </div>
     </template>
   </CompanyProfile>
+
+  <br />
+  <p style="border: 1px solid black"></p>
+  <br />
+
+  <CompanyCourses></CompanyCourses>
 </template>
 
 <script>
+import AppHeader from "./components/layouts/AppHeader.vue";
 import GameMonster from "./components/GameMonster.vue";
 import UsersManagement from "./components/UsersManagement.vue";
-import TaskManagement from "./components/TaskManagement.vue";
 import CompanyProfile from "./components/CompanyProfile.vue";
+import CompanyCourses from "./components/CompanyCourses.vue";
 
 export default {
   name: "App",
   components: {
+    AppHeader,
     GameMonster,
     UsersManagement,
-    TaskManagement,
     CompanyProfile,
+    CompanyCourses,
   },
   data() {
     return {
       selectedComponent: "task-management",
+      selectedUserIndex: null,
       users: [
         {
           id: 0,
           name: "Ammar",
           degree: "BSCS",
+          bio: "",
+          profile: "/img/trainers/trainer-1.jpg",
         },
         {
           id: 1,
           name: "Ali",
           degree: "Civil",
+          bio: "",
+          profile: "/img/trainers/trainer-3.jpg",
         },
       ],
     };
   },
   methods: {
-    userUpdated(val) {
+    handleUpdate(val) {
       console.log("User updated: ", val);
     },
 
-    deleteUser() {
-      console.log("parent delete");
+    deleteUser(userId) {
+      console.log("parent delete: ", userId);
     },
 
     loadComponent(componentName) {
       this.selectedComponent = componentName;
     }
   },
-
-  // provide: {
-  //   operations: ['Update', 'Delete', 'Edit', 'Add']
-  // },
 
   provide() {
     return {
@@ -135,6 +139,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'boxicons/css/boxicons.min.css';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

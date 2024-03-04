@@ -1,8 +1,18 @@
 <template>
   <div>
-    <p v-for="profile in profiles" :key="profile.id">
-        <slot :item="profile"></slot>
-    </p>
+
+        <section id="events" class="events">
+      <div class="container">
+        <div class="row">
+          <div v-for="profile in profiles" :key="profile.id" class="col-md-6 d-flex align-items-stretch">
+            <div class="card">
+                <slot :item="profile"></slot>
+                </div>
+                </div>
+                </div>
+                </div>
+                </section>
+
   </div>
 </template>
 

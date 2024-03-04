@@ -2,30 +2,30 @@
   <div class="game">
     <h2>{{ msg }} {{gameReady}}</h2>
     <div id="characters">
-      <section class="player">
+      <div class="player">
         <h4>Player</h4>
         <div class="healthbar" :style="playerBarStyle">
           {{ playerHealth }}
         </div>
-      </section>
+      </div>
 
-      <section class="enemy">
+      <div class="enemy">
         <h4>Monster</h4>
         <div class="healthbar" :style="monsterBarStyle">
           {{ monsterHealth }}
         </div>
-      </section>
+      </div>
     </div>
 
     <br>
     <br>
-    <section id="controls">
+    <div id="controls">
       <button @click="attackMonster" :disabled="gameover">Attack</button> &nbsp;
       <button @click="specialAttack" :disabled="specialAttackAvailibility">Special Attack</button> &nbsp;
       <button @click="healPlayer" :disabled="gameover">Heal</button>
       <br> <br>
       <button @click="startNewGame" :disabled="!gameover">Start new</button>
-    </section>
+    </div>
 
     <h2>{{ result }}</h2>
   </div>
@@ -49,6 +49,10 @@ export default {
   // ],
 
   props: {
+    parentData: {
+      type: Object, 
+      required: true 
+    },
     msg: {
       type: String,
       required: false,

@@ -1,22 +1,26 @@
 <template>
   <div class="tasks">
-    <input
+    <section class="addTask">
+      <input
       type="text"
       placeholder="Enter your task"
       v-model="task"
       v-on:keypress.enter="addTask()"
     />
-    <button type="button" @click="addTask()">Add Task</button>
-    <ul v-for="(task, index) of tasks" v-bind:key="index">
-      <p>
-        {{ index }} <input type="text" :value="task" />
-        <button type="button" @click="deleteTask(index)">Delete Task</button>
-      </p>
-    </ul>
-    <br />
+    <button type="button" class="btn btn-primary" @click="addTask()">Assign Task</button>
+    </section>
 
+    <section class="task-padding" v-if="tasks && tasks.length > 0">
+      <div class="flex-align-center" v-for="(task, index) of tasks" v-bind:key="index">
+        <p>{{ task }}</p>
+        <button type="button" class="btn btn-danger" @click="deleteTask(index)">Delete Task</button>
+      </div>
+    </section>
+  </div>
+ 
+  <div class="addExp">
     <input type="text" placeholder="Enter your experience" ref="experience" />
-    <button type="button" @click="setExp()">Check Exp</button>
+    <button type="button" class="btn btn-secondary" @click="setExp()">Check Exp</button>
   </div>
 
   <teleport to="body">
@@ -41,8 +45,18 @@ export default {
       task: "",
     };
   },
+  inject: ["operations", "deleteUser"],
 
-  props: [],
+  props: [
+    "parentData"
+  ],
+
+  emits: {
+    "handle-update": function (id) {
+      if (!id || id <= -1) return false;
+      else return true;
+    },
+  },
 
   methods: {
     addTask() {
@@ -73,4 +87,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.addTask, .addExp{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+
+  button {
+    height: 30px;
+    font-size: 11px;
+    margin-left: 10px;
+  }
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
+
+  button {
+    height: 30px;
+    font-size: 11px;
+    margin-left: 10px;
+  }
+}
+
+.task-padding {
+  padding: 10px 10px;
+}
 </style>
