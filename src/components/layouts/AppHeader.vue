@@ -10,14 +10,14 @@
     <li><a >Tasks</a></li>
     <li><a >Companies</a></li>
     <li><a >Courses</a></li>
-    <!-- <BaseButtons @click="func1()">Button1</BaseButtons> -->
+    <BaseButtons @click="func1()">Button1</BaseButtons>
     <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
       <ul>
         <li><a href="#">Drop Down 1</a></li>
         <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
           <ul>
             <li><a href="#">Deep Drop Down 1</a></li>
-            <li><a href="#">Deep Drop Down 2</a></li>
+            <li><a href="\=#">Deep Drop Down 2</a></li>
             <li><a href="#">Deep Drop Down 3</a></li>
             <li><a href="#">Deep Drop Down 4</a></li>
             <li><a href="#">Deep Drop Down 5</a></li>
@@ -37,12 +37,16 @@
 <script>
 export default {
   name: "AppHeader",
+
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
   
   methods: {
-        func1(){
-            console.log("here")
-        }
-    }
+      func1(){
+        console.log("here");
+        this.$emit('update:modelValue', 'some v-model data')
+      }
+  }
 };
 </script>
 

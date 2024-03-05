@@ -19,8 +19,9 @@
   </div>
  
   <div class="addExp">
-    <input type="text" placeholder="Enter your experience" ref="experience" />
+    <input type="text" placeholder="Enter your experience" ref="experience" v-model.lazy="experience" @blur="validateInput" />
     <button type="button" class="btn btn-secondary" @click="setExp()">Check Exp</button>
+    <p v-if="experienceValidation === 'invalid'">Invalid Experience</p>
   </div>
 
   <teleport to="body">
@@ -43,6 +44,8 @@ export default {
       inputIsInvalid: false,
       tasks: [],
       task: "",
+      experience: "",
+      experienceValidation: 'pending',
     };
   },
   inject: ["operations", "deleteUser"],
@@ -78,6 +81,14 @@ export default {
     setExp() {
       console.dir(this.$refs.experience.value);
     },
+
+    validateInput() {
+      if (this.experience.trim() === '') {
+        this.experienceValidation = 'invalid'
+      }
+      else this.experienceValidation = 'valid'
+    },
+
   },
 
   computed: {},

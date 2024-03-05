@@ -1,5 +1,6 @@
 <template>
-  <AppHeader></AppHeader>
+  <AppHeader v-model="something"></AppHeader>
+  <button type="button" @click="vmodelcheck">V-MODEL</button>
   <!-- <UsersManagement
     v-for="user in users"
     :key="user.id"
@@ -61,6 +62,7 @@ export default {
     return {
       selectedComponent: "task-management",
       selectedUserIndex: null,
+      something: null,
       users: [
         {
           id: 0,
@@ -90,7 +92,11 @@ export default {
 
     loadComponent(componentName) {
       this.selectedComponent = componentName;
-    }
+    },
+
+    vmodelcheck(){
+      console.log(this.something)
+    },
   },
 
   provide() {
