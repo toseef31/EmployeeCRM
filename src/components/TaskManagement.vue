@@ -1,13 +1,8 @@
 <template>
   <div class="tasks">
     <section class="addTask">
-      <input
-      type="text"
-      placeholder="Enter your task"
-      v-model="task"
-      v-on:keypress.enter="addTask()"
-    />
-    <button type="button" class="btn btn-primary" @click="addTask()">Assign Task</button>
+      <input type="text" placeholder="Enter your task" v-model="task" v-on:keypress.enter="addTask()" />
+      <button type="button" class="btn btn-primary" @click="addTask()">Assign Task</button>
     </section>
 
     <section class="task-padding" v-if="tasks && tasks.length > 0">
@@ -17,9 +12,10 @@
       </div>
     </section>
   </div>
- 
+
   <div class="addExp">
-    <input type="text" placeholder="Enter your experience" ref="experience" v-model.lazy="experience" @blur="validateInput" />
+    <input type="text" placeholder="Enter your experience" ref="experience" v-model.lazy="experience"
+      @blur="validateInput" />
     <button type="button" class="btn btn-secondary" @click="setExp()">Check Exp</button>
     <p v-if="experienceValidation === 'invalid'">Invalid Experience</p>
   </div>
@@ -33,6 +29,7 @@
 
 <script>
 import AlertDialog from "./AlertDialog.vue";
+import axios from 'axios';
 
 export default {
   name: "TaskManagement",
@@ -71,7 +68,21 @@ export default {
         return;
       }
       this.tasks.push(this.task);
-      this.task = "";
+
+
+      axios.post('https://peekemployeemanagement-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json', JSON.stringify(this.task))
+        .then(function (response) {
+          // handle success
+          this.task = "";
+          console.log(response);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function () {
+          // always executed
+        });
     },
 
     deleteTask(index) {
@@ -98,7 +109,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.addTask, .addExp{
+.addTask,
+.addExp {
   display: flex;
   align-items: center;
   padding: 10px;
