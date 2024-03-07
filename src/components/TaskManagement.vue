@@ -70,7 +70,7 @@ export default {
       this.tasks.push(this.task);
 
 
-      axios.post('https://peekemployeemanagement-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json', JSON.stringify(this.task))
+      axios.post('https://peekemployeemanagement.firebasedatabase.app/tasks.json', JSON.stringify(this.task))
         .then(function (response) {
           // handle success
           this.task = "";
