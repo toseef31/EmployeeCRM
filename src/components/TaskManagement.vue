@@ -1,11 +1,11 @@
 <template>
   <div class="tasks">
-    <section class="addTask">
+    <section class="addTask section-padding">
       <input type="text" placeholder="Enter your task" v-model="task" v-on:keypress.enter="addTask()" />
       <button type="button" class="btn btn-primary" @click="addTask()">Assign Task</button>
     </section>
 
-    <section class="task-padding" v-if="tasks && tasks.length > 0">
+    <section class="task-padding section-padding" v-if="tasks && tasks.length > 0">
       <div class="flex-align-center" v-for="(task, index) of tasks" v-bind:key="index">
         <p>{{ task }}</p>
         <button type="button" class="btn btn-danger" @click="deleteTask(index)">Delete Task</button>

@@ -1,19 +1,26 @@
 <template>
-  <div>
+      <!-- <button type="button" @click="loadComponent('users-management')">User Management</button> &nbsp;
+  <button type="button" @click="loadComponent('game-monster')">Time Pass Game</button>
+  <br><br>
+  <keep-alive>
+    <component :is="selectedComponent" :parentData="users" @handle-update="handleUpdate"></component>
+  </keep-alive> -->
 
-        <section id="events" class="events">
-      <div class="container">
-        <div class="row">
-          <div v-for="profile in profiles" :key="profile.id" class="col-md-6 d-flex align-items-stretch">
-            <div class="card">
-                <slot :item="profile"></slot>
-                </div>
-                </div>
-                </div>
-                </div>
-                </section>
+    <div>
 
-  </div>
+        <section id="events" class="events section-padding">
+            <div class="container">
+                <div class="row">
+                    <div v-for="profile in profiles" :key="profile.id" class="col-md-6 d-flex align-items-stretch">
+                        <div class="card">
+                            <slot :item="profile"></slot>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
 </template>
 
 <script>
@@ -41,5 +48,4 @@ export default {
 </script>
 
 
-<style scoped>
-</style>
+<style scoped></style>

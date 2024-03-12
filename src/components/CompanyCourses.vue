@@ -2,7 +2,7 @@
   <div>
     <main id="main" data-aos="fade-in">
       <!-- ======= Courses Section ======= -->
-      <section id="courses" class="courses" v-if="courses && courses.length > 0">
+      <section id="courses" class="courses section-padding" v-if="courses && courses.length > 0">
         <div class="container" data-aos="fade-up">
           <div class="row" data-aos="zoom-in" data-aos-delay="100">
       

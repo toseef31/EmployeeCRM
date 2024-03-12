@@ -2,7 +2,7 @@
   <div class="users">
     <base-card>
       <template v-slot:second>
-        <section id="trainers" class="trainers">
+        <section id="trainers" class="trainers section-padding">
       <div class="container">
 
         <div class="row">

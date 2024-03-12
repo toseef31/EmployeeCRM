@@ -1,6 +1,11 @@
 <template>
-  <AppHeader v-model="something"></AppHeader>
-  <button type="button" @click="vmodelcheck">V-MODEL</button>
+  <AppHeader v-model="loggedIn" @update:modelValue="handleLoggedStatus"></AppHeader>
+
+  <router-view></router-view>
+
+  <AppSubscribe></AppSubscribe>
+  <AppFooter></AppFooter>
+
   <!-- <UsersManagement
     v-for="user in users"
     :key="user.id"
@@ -11,18 +16,7 @@
   >
   </UsersManagement> -->
 
-  <button type="button" @click="loadComponent('users-management')">User Management</button> &nbsp;
-  <button type="button" @click="loadComponent('game-monster')">Time Pass Game</button>
-  <br><br>
-  <keep-alive>
-    <component :is="selectedComponent" :parentData="users" @handle-update="handleUpdate"></component>
-  </keep-alive>
-
-  <br />
-  <p style="border: 1px solid black"></p>
-  <br />
-
-  <CompanyProfile>
+  <!-- <CompanyProfile>
     <template #default="slotProfile">
               <div class="card-img">
                 <img src="/img/events-2.jpg" alt="...">
@@ -35,34 +29,26 @@
     </template>
   </CompanyProfile>
 
-  <br />
-  <p style="border: 1px solid black"></p>
-  <br />
-
-  <CompanyCourses></CompanyCourses>
+  <CompanyCourses></CompanyCourses> -->
 </template>
 
 <script>
 import AppHeader from "./components/layouts/AppHeader.vue";
-import GameMonster from "./components/GameMonster.vue";
-import UsersManagement from "./components/UsersManagement.vue";
-import CompanyProfile from "./components/CompanyProfile.vue";
-import CompanyCourses from "./components/CompanyCourses.vue";
+import AppSubscribe from "./components/layouts/AppSubscribe.vue"
+import AppFooter from "./components/layouts/AppFooter.vue"
 
 export default {
   name: "App",
   components: {
     AppHeader,
-    GameMonster,
-    UsersManagement,
-    CompanyProfile,
-    CompanyCourses,
+    AppFooter,
+    AppSubscribe
   },
   data() {
     return {
       selectedComponent: "task-management",
       selectedUserIndex: null,
-      something: null,
+      loggedIn: false,
       users: [
         {
           id: 0,
@@ -94,9 +80,9 @@ export default {
       this.selectedComponent = componentName;
     },
 
-    vmodelcheck(){
-      console.log(this.something)
-    },
+    handleLoggedStatus(loggedIn) {
+      console.log('Is logged in: ', loggedIn)
+    }
   },
 
   provide() {
@@ -106,7 +92,8 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+  },
 
   watch: {},
 
@@ -155,6 +142,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
