@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import BaseCard from './components/UI/BaseCard.vue';
 import BaseButtons from './components/UI/BaseButtons.vue';
-import UsersManagement from './components/UsersManagement.vue';
+import UsersManagement from './components/users/UserManagement.vue';
 import TaskManagement from './components/TaskManagement.vue';
 import CompanyCourses from './components/CompanyCourses.vue';
 import CompanyProfile from './components/CompanyProfile.vue';

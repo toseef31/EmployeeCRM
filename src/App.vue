@@ -6,30 +6,6 @@
   <AppSubscribe></AppSubscribe>
   <AppFooter></AppFooter>
 
-  <!-- <UsersManagement
-    v-for="user in users"
-    :key="user.id"
-    :id="user.id"
-    :name="user.name"
-    :degree="user.degree"
-    @user-updated="userUpdated"
-  >
-  </UsersManagement> -->
-
-  <!-- <CompanyProfile>
-    <template #default="slotProfile">
-              <div class="card-img">
-                <img src="/img/events-2.jpg" alt="...">
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"><a href="">{{ slotProfile.item.name }}</a></h5>
-                <p class="fst-italic text-center">{{ slotProfile.item.partner_time }}</p>
-                <p class="card-text">{{ slotProfile.item.partner }}</p>
-              </div>
-    </template>
-  </CompanyProfile>
-
-  <CompanyCourses></CompanyCourses> -->
 </template>
 
 <script>
@@ -46,7 +22,6 @@ export default {
   },
   data() {
     return {
-      selectedComponent: "task-management",
       selectedUserIndex: null,
       loggedIn: false,
       users: [
@@ -72,24 +47,9 @@ export default {
       console.log("User updated: ", val);
     },
 
-    deleteUser(userId) {
-      console.log("parent delete: ", userId);
-    },
-
-    loadComponent(componentName) {
-      this.selectedComponent = componentName;
-    },
-
     handleLoggedStatus(loggedIn) {
       console.log('Is logged in: ', loggedIn)
     }
-  },
-
-  provide() {
-    return {
-      operations: ["Update", "Delete", "Edit", "Add"],
-      deleteUser: this.deleteUser,
-    };
   },
 
   computed: {
